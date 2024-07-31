@@ -49,7 +49,34 @@ class PokemonViewController: UIViewController {
             
             sender.layer.borderColor = UIColor.systemGreen.cgColor
             sender.layer.borderWidth = 2
+            
+            let url = URL(string: correctAnswerImage)
+            pokemonImage.kf.setImage(with: url)
+            
+            Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { timer in
+                self.pokemonManager.fetchPokemon()
+                self.labelMessage.text = " "
+                sender.layer.borderWidth = 0
+            }
+        } else {
+            labelMessage.text = "NOOO, es un \(correctAnswer.capitalized)"
+            sender.layer.borderColor = UIColor.systemRed.cgColor
+            sender.layer.borderWidth = 2
+            let url = URL(string: correctAnswerImage)
+            pokemonImage.kf.setImage(with: url)
+            
+            Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { timer in
+                self.resetGame()
+                sender.layer.borderWidth = 0
+            }
         }
+    }
+    
+    func resetGame() {
+        self.pokemonManager.fetchPokemon()
+        game.setScore(score: 0)
+        labelScore.text = "Puntaje: \(game.score)"
+        self.labelMessage.text = " "
     }
     
     func createButtons() {
