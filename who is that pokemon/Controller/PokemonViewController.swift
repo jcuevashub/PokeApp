@@ -95,7 +95,14 @@ extension PokemonViewController: ImageManagerDelegate {
         DispatchQueue.main.async { [self] in
             let url = URL(string: image.imageUrl)
             
-            pokemonImage.kf.setImage(with: url)
+            let effect = ColorControlsProcessor(brightness: -1, contrast: 1, saturation: 1, inputEV: 0)
+            pokemonImage.kf.setImage(
+                with: url,
+                options: [
+                    .processor(effect)
+                ]
+            
+            )
         }
     }
     
