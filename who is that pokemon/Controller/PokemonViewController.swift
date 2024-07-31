@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PokemonViewController: UIViewController {
     
@@ -18,7 +19,12 @@ class PokemonViewController: UIViewController {
     lazy var imageManager = ImageManager()
     lazy var game = GameModel()
     
-    var random4Pokemons: [PokemonModel] = []
+    var random4Pokemons: [PokemonModel] = [] {
+        didSet {
+            setButtonTitles()
+        }
+    }
+    
     var correctAnswer: String = ""
     var correctAnswerImage: String = ""
     
@@ -31,10 +37,19 @@ class PokemonViewController: UIViewController {
         
         createButtons()
         pokemonManager.fetchPokemon()
+        labelMessage.text = " "
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        print(sender.title(for: .normal)!)
+        let userAnswer = sender.title(for: .normal)!
+        
+        if game.checkAnswer(userAnswer, correctAnswer) {
+            labelMessage.text = "Sí, es un \(userAnswer)"
+            labelScore.text = "Puntaje: \(game.score)"
+            
+            sender.layer.borderColor = UIColor.systemGreen.cgColor
+            sender.layer.borderWidth = 2
+        }
     }
     
     func createButtons() {
@@ -45,6 +60,14 @@ class PokemonViewController: UIViewController {
             button.layer.shadowRadius = 0
             button.layer.masksToBounds = false
             button.layer.cornerRadius = 10.0
+        }
+    }
+    
+    func setButtonTitles() {
+        for (index, button) in answerButtons.enumerated() {
+            DispatchQueue.main.async {[self] in
+                button.setTitle(random4Pokemons[safe: index]?.name.capitalized, for: .normal)
+            }
         }
     }
 }
@@ -67,7 +90,13 @@ extension PokemonViewController: PokemonManagerDelegate {
 
 extension PokemonViewController: ImageManagerDelegate {
     func didUpdateImage(image: ImageModel) {
-        print(image.imageUrl)
+        correctAnswerImage = image.imageUrl
+        
+        DispatchQueue.main.async { [self] in
+            let url = URL(string: image.imageUrl)
+            
+            pokemonImage.kf.setImage(with: url)
+        }
     }
     
     func didFailWithErrorImage(error: any Error) {

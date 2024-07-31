@@ -46,7 +46,7 @@ struct ImageManager {
         let decoder = JSONDecoder()
         do {
             let decodeData = try decoder.decode(ImageData.self, from: imageData)
-            let image = decodeData.sprites.other?.officialArtwork?.frontDefault ?? ""
+            let image = decodeData.sprites.other?.officialArtwork?.frontShiny ?? ""
             return ImageModel(imageUrl: image)
         } catch {
             return nil
