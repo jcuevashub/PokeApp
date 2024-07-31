@@ -21,6 +21,7 @@
 		8BFF93B52C5877E80059D12E /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFF93B42C5877E80059D12E /* ImageManager.swift */; };
 		8BFF93B72C5877F50059D12E /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFF93B62C5877F50059D12E /* ImageModel.swift */; };
 		8BFF93B92C5878060059D12E /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFF93B82C5878060059D12E /* GameModel.swift */; };
+		8BFF93C12C5AE2620059D12E /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFF93C02C5AE2620059D12E /* ResultsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		8BFF93B42C5877E80059D12E /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		8BFF93B62C5877F50059D12E /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		8BFF93B82C5878060059D12E /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		8BFF93C02C5AE2620059D12E /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				039F9E032898214F00B69144 /* PokemonViewController.swift */,
+				8BFF93C02C5AE2620059D12E /* ResultsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BFF93C12C5AE2620059D12E /* ResultsViewController.swift in Sources */,
 				039F9E042898214F00B69144 /* PokemonViewController.swift in Sources */,
 				8BFF93B12C5877C80059D12E /* PokemonModel.swift in Sources */,
 				039F9E002898214F00B69144 /* AppDelegate.swift in Sources */,
