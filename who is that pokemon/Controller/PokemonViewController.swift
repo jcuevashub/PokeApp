@@ -16,8 +16,13 @@ class PokemonViewController: UIViewController {
     
     lazy var pokemonManager = PokemonManager()
     
+    var random4Pokemons: [PokemonModel] = []
+    var correctAnswer: String = ""
+    var correctAnswerImage: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        pokemonManager.delegate = self
         
         createButtons()
         pokemonManager.fetchPokemon()
@@ -41,12 +46,26 @@ class PokemonViewController: UIViewController {
 
 extension PokemonViewController: PokemonManagerDelegate {
     func didUpdatePokemon(pokemon: [PokemonModel]) {
-        print(pokemon)
+        random4Pokemons = pokemon.chosse(4)
+        
+        let index = Int.random(in: 0...3)
+        let imageData = random4Pokemons[index].imageURL
+        correctAnswer = random4Pokemons[index].name
     }
     
     func didFailWithError(error: any Error) {
         print(error)
     }
-    
-    
+}
+
+extension Collection where Indices.Iterator.Element == Index {
+    public subscript(safe index: Index) -> Iterator.Element? {
+        return (startIndex <= index && index < endIndex) ? self[index] : nil
+    }
+}
+
+extension Collection {
+    func chosse(_ n: Int) -> Array<Element> {
+        Array(shuffled().prefix(n))
+    }
 }
