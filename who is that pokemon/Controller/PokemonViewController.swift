@@ -17,6 +17,14 @@ class PokemonViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createButtons()
+    }
+    
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        print(sender.title(for: .normal)!)
+    }
+    
+    func createButtons() {
         for button in answerButtons {
             button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5).cgColor
             button.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
@@ -25,8 +33,5 @@ class PokemonViewController: UIViewController {
             button.layer.masksToBounds = false
             button.layer.cornerRadius = 10.0
         }
-    }
-    
-    @IBAction func buttonPressed(_ sender: UIButton) {
     }
 }
