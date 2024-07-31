@@ -15,6 +15,7 @@ class PokemonViewController: UIViewController {
     @IBOutlet var answerButtons: [UIButton]!
     
     lazy var pokemonManager = PokemonManager()
+    lazy var imageManager = ImageManager()
     
     var random4Pokemons: [PokemonModel] = []
     var correctAnswer: String = ""
@@ -23,6 +24,7 @@ class PokemonViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         pokemonManager.delegate = self
+        imageManager.delegate = self
         
         createButtons()
         pokemonManager.fetchPokemon()
@@ -51,11 +53,25 @@ extension PokemonViewController: PokemonManagerDelegate {
         let index = Int.random(in: 0...3)
         let imageData = random4Pokemons[index].imageURL
         correctAnswer = random4Pokemons[index].name
+        
+        imageManager.fetchImage(url: imageData)
     }
     
     func didFailWithError(error: any Error) {
         print(error)
     }
+}
+
+extension PokemonViewController: ImageManagerDelegate {
+    func didUpdateImage(image: ImageModel) {
+        print(image.imageUrl)
+    }
+    
+    func didFailWithErrorImage(error: any Error) {
+        print(error)
+    }
+    
+    
 }
 
 extension Collection where Indices.Iterator.Element == Index {

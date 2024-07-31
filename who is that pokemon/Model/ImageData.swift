@@ -6,3 +6,31 @@
 //
 
 import Foundation
+
+struct ImageData: Codable {
+    let sprites: Sprites
+}
+
+class Sprites: Codable {
+    let other: Other?
+    
+    init(other: Other?) {
+        self.other = other
+    }
+}
+
+struct Other: Codable {
+    let officialArtwork: OfficialArtwork?
+    
+    enum CodigingKeys: String, CodingKey {
+        case officialArtwork = "official-artwork"
+    }
+}
+
+struct OfficialArtwork: Codable {
+    let frontDefault: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case frontDefault = "front_default"
+    }
+}
