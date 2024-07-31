@@ -59,16 +59,27 @@ class PokemonViewController: UIViewController {
                 sender.layer.borderWidth = 0
             }
         } else {
-            labelMessage.text = "NOOO, es un \(correctAnswer.capitalized)"
-            sender.layer.borderColor = UIColor.systemRed.cgColor
-            sender.layer.borderWidth = 2
-            let url = URL(string: correctAnswerImage)
-            pokemonImage.kf.setImage(with: url)
-            
-            Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { timer in
-                self.resetGame()
-                sender.layer.borderWidth = 0
-            }
+//            labelMessage.text = "NOOO, es un \(correctAnswer.capitalized)"
+//            sender.layer.borderColor = UIColor.systemRed.cgColor
+//            sender.layer.borderWidth = 2
+//            let url = URL(string: correctAnswerImage)
+//            pokemonImage.kf.setImage(with: url)
+//            
+//            Timer.scheduledTimer(withTimeInterval: 0.8, repeats: false) { timer in
+//                self.resetGame()
+//                sender.layer.borderWidth = 0
+//            }
+            self.performSegue(withIdentifier: "goToResult", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult" {
+            let destination = segue.destination as! ResultsViewController
+            destination.pokemonName = correctAnswer
+            destination.pokemonImageURL = correctAnswerImage
+            destination.finalScore = game.score
+            resetGame()
         }
     }
     
